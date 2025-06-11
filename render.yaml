@@ -9,19 +9,19 @@ services:
     envVars:
       - key: POSTGRES_HOST
         fromService:
-          type: psql
+          type: postgres
           name: dify-db
       - key: POSTGRES_USER
         fromService:
-          type: psql
+          type: postgres
           name: dify-db
       - key: POSTGRES_PASSWORD
         fromService:
-          type: psql
+          type: postgres
           name: dify-db
       - key: POSTGRES_DATABASE
         fromService:
-          type: psql
+          type: postgres
           name: dify-db
       - key: REDIS_HOST
         fromService:
@@ -50,12 +50,12 @@ services:
     startCommand: "celery -A app.celery.worker worker -l info"
     envVars:
       - fromService:
-          type: psql
+          type: postgres
           name: dify-db
       - fromService:
           type: redis
           name: dify-redis
-  - type: psql
+  - type: postgres
     name: dify-db
     databaseName: dify
     region: frankfurt # Можно выбрать другой регион
